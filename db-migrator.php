@@ -10,6 +10,8 @@ use DbMigrator\DbMigratorPlugin;
  * Author URI: https://github.com/erikgreasy
  */
 
+require __DIR__ . '/vendor/autoload.php';
+
 if(defined('WP_CLI') && WP_CLI) {
     (new DbMigratorPlugin)->run();
 }

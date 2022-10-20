@@ -1,0 +1,16 @@
+{
+    "name": "erikgreasy/wp-db-migrations",
+    "description": "Databse migrations for WordPress inspired by Laravel framework.",
+    "autoload": {
+        "psr-4": {
+            "DbMigrator\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Erik Masny",
+            "email": "erik.masny@gmail.com"
+        }
+    ],
+    "require": {}
+}

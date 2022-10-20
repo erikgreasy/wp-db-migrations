@@ -40,10 +40,10 @@ return new class extends Migration
 {
     public function up()
     {
-        $migrationsTable = $this->getPrefixedTable('test');
+        $tableName = $this->getPrefixedTable('test');
         $charset_collate = $this->wpdb->get_charset_collate();
 
-        $sql = "CREATE TABLE $migrationsTable (
+        $sql = "CREATE TABLE $tableName (
             id int(11) NOT NULL auto_increment,
             name varchar(60) NOT NULL,
             UNIQUE KEY id (id)

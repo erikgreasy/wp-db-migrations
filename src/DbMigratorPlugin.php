@@ -23,12 +23,13 @@ class DbMigratorPlugin
     public function run()
     {
         \WP_CLI::add_command('migrator migrate', function () {
+            $this->createMigrationsTable();
+            
             $migrationDirs = [];
 
             $migrationDirs = apply_filters('dbmigrator_migrations_dirs', $migrationDirs);
 
             $this->batch = $this->getNextBatch();
-            $this->createMigrationsTable();
 
             foreach ($this->getPendingMigrations($migrationDirs) as $migrationName => $migrationFile) {
                 $class = require $migrationFile;

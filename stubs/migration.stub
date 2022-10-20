@@ -1,0 +1,11 @@
+<?php
+
+use DbMigrator\Migration;
+
+return new class extends Migration
+{
+    public function up()
+    {
+        // here goes your migration logic
+    }
+};

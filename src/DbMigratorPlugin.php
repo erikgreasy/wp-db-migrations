@@ -24,7 +24,7 @@ class DbMigratorPlugin
     {
         \WP_CLI::add_command('migrator migrate', function () {
             $this->createMigrationsTable();
-            
+
             $migrationDirs = [];
 
             $migrationDirs = apply_filters('dbmigrator_migrations_dirs', $migrationDirs);
@@ -40,6 +40,18 @@ class DbMigratorPlugin
 
                 $this->runUp($class, $migrationName);
             }
+        });
+
+        \WP_CLI::add_command('migrator make:migration', function($args, $assocArgs) {
+            if(!count($args) || !isset($args[0])) {
+                throw new RuntimeException('You must specify the migration name!');
+            }
+
+            $migrationName = $args[0];
+
+            $migrationStub = file_get_contents(__DIR__ . '/../stubs/migration.stub');
+
+            file_put_contents($migrationName . '.php', $migrationStub);
         });
     }
 

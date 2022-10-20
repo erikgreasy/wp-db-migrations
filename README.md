@@ -33,6 +33,7 @@ Migration file is just a PHP file, which follows specific structure, so the plug
 Simple example migration may look like this:
 
 ```PHP
+<?php
 // 001_reviewplugin_create_test_table.php
 
 use DbMigrator\Migration;

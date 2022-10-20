@@ -29,6 +29,7 @@ add_filter('dbmigrator_migrations_dirs', function($migrationDirs) {
 ## Creating your first migration file
 Migration file is just a PHP file, which follows specific structure, so the plugin can scan this file and run.
 
+### Migration structure
 Simple example migration may look like this:
 
 ```PHP
@@ -62,6 +63,13 @@ Few important points to take from example above are:
   - use some kind of identifier (eg. reviewplugin)
   - the rest of the file name should describe what the migration does
   - use snake_case for better readability
+
+### Creating migration files
+You can create the migrations files manually, or you can generate them with WP CLI command:
+```
+wp migrator make:migrations 001_your_migration_name
+```
+which will create an empty migration with specified name in the location, from where the command was run.
 
 ## Running your migrations
 Now you are ready to run your migrations. To run the migrations, use the WP CLI command:

@@ -9,6 +9,7 @@ class Migrator
     private string $migrationsTable;
     private \wpdb $wpdb;
     private ?int $batch = null;
+    private bool $logEnabled = false;
 
     public function __construct()
     {
@@ -17,6 +18,10 @@ class Migrator
         $this->wpdb = $wpdb;
 
         $this->migrationsTable = $wpdb->prefix . 'migrations';
+
+        if(defined('WP_CLI') && WP_CLI) {
+            $this->logEnabled = true;
+        }
     }
 
     public function migrate()
@@ -31,12 +36,14 @@ class Migrator
 
         $pendingMigrations = $this->getPendingMigrations($migrationDirs);
 
-        if (!count($pendingMigrations)) {
+        if ($this->logEnabled && !count($pendingMigrations)) {
             \WP_CLI::log("Nothing to migrate.");
         }
 
         foreach ($pendingMigrations as $migrationName => $migrationFile) {
-            \WP_CLI::log("Migrating: {$migrationName}");
+            if($this->logEnabled) {
+                \WP_CLI::log("Migrating: {$migrationName}");
+            }
 
             $class = require $migrationFile;
 
@@ -46,7 +53,9 @@ class Migrator
 
             $this->runUp($class, $migrationName);
 
-            \WP_CLI::log("Migrated: {$migrationName}" . PHP_EOL);
+            if($this->logEnabled) {
+                \WP_CLI::log("Migrated: {$migrationName}" . PHP_EOL);
+            }
         }
     }
 

@@ -77,3 +77,12 @@ Now you are ready to run your migrations. To run the migrations, use the WP CLI 
 ```
 wp migrator migrate
 ```
+Add this command to the deploy script of your app, or run the command manually.
+
+Alternatively, you can run the migrations directly, without using WP_CLI, by calling Migrator method. For example, this can be done during the plugin activation:
+
+```PHP
+register_activation_hook(__FILE__, function() {
+    (new \DbMigrator\Migrator())->migrate();
+});
+```

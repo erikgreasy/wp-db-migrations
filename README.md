@@ -68,7 +68,7 @@ Few important points to take from example above are:
 ### Creating migration files
 You can create the migrations files manually, or you can generate them with WP CLI command:
 ```
-wp migrator make:migrations 001_your_migration_name
+wp migrator make:migration 001_your_migration_name
 ```
 which will create an empty migration with specified name in the location, from where the command was run.
 
